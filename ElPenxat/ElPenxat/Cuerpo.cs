@@ -79,7 +79,7 @@ namespace ElPenxat8
 
                 for (i=0; i<= totaletra -1;i++)
                 {
-//asadasasdadasdasdd
+
                 }
 
                 
