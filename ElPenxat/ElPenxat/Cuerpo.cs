@@ -76,7 +76,7 @@ namespace ElPenxat8
                 letrapulsada = Console.ReadLine();
             
 
-
+                
                 for (i=0; i<= totaletra -1;i++)
                 {
 
