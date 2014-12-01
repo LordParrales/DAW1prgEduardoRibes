@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RibesE.Programación.Eval1.Logica;
 
-namespace CUI
+namespace RibesE.Programación.Eval1.Logica.CUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hola me llamo señor Burns :D");
+            int secreto = Juego.SecretoDeLaVida();
+            Console.WriteLine("El seccrote de la vida es: " + secreto);
+            Console.ReadKey();
         }
     }
 }
