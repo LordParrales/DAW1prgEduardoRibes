@@ -31,68 +31,68 @@ namespace ElPenxat8
             string[] palabra = new string[10]; //Creador de palabras
             palabra[1] = "manolo";
             palabra[2] = "pepito";
-            palabra[3] = "programacion";
+            palabra[3] = "mama";
             palabra[4] = "raton";
             palabra[5] = "potro";
-            palabra[6] = "impresora";
+            palabra[6] = "papa";
             palabra[7] = "pie";
 
-            int contador = 0; //id del contador
+           
             int totaletra = 0;// contar letras
             int numpalabra = 0; // numero para escojer la palabra
              
 
-            string palabra2 = "";
-            string palabra3 = "";
+            string PalabraSecreta = "";
+            string PalabraUsuario = "";
 
             Random aleapalabra = new Random();  //crear un metodo random para que escoja una variable al azar
              
             numpalabra = aleapalabra.Next(1, 7); // escoje una
-            palabra2 = palabra[numpalabra]; // pasa la palabra
+            PalabraSecreta = palabra[numpalabra]; // pasa la palabra
 
-            totaletra = palabra2.Length; //separa por caracteres para contar las letras.
+            totaletra = PalabraSecreta.Length; //separa por caracteres para contar las letras.
             Console.WriteLine("La palabra tiene {0} letras", totaletra);
 
             for (int i = 0; i <= totaletra; i++)
             {
-                if (palabra2.Substring(i, 1) != " ")       //para sustraer del numero i un caracter y si no es un espacio hara esto 
-                    palabra3 = palabra3 + "$";               //cambia las letras por asteriscos
+                if (PalabraSecreta.Substring(i, 1) != " ")       //para sustraer del numero i un caracter y si no es un espacio  
+                    PalabraUsuario = PalabraUsuario + "$";               //cambia las letras por asteriscos
 
                 else
-                    palabra3 = palabra3 + " ";              //por si hay espacios para que no tenga errores
+                    PalabraUsuario = PalabraUsuario + " ";              //por si hay espacios para que no tenga errores
            
             }
 
 
-            Console.Write("\n" + palabra3);
+            Console.Write("\n" + PalabraUsuario);
 
             int intentos = 0;
 
             do
             {
-                string letrapulsada= "", le = "";
+                string letrapulsada= "", letraelegida = "";
                 bool exito = false;
                 Console.Write("Inserte una letra en minuscula: ");
                 letrapulsada = Console.ReadLine();
             
 
                 
-                for (j=0; j<= totaletra -1;j++)  //para que analize letra por letra nustra palabra generada
+                for (int j=0; j<= totaletra -1;j++)  //para que analize letra por letra nustra palabra generada
                 {
-                    le = palabra2.Substring(j,1);
-                    if (le.Equals(letrapulsada))
+                    letraelegida = PalabraSecreta.Substring(j,1); //separar las letras para comprobar las letras y luego iguala para saber si la letra pulsada es igual a la letra de la palabra
+                    if (letraelegida.Equals(letrapulsada))
                     {
-                        palabra3 = palabra3.Remove(j, 1);
-                        palabra3  = palabra3.Insert(1, letrapulsada);
-                        exito = true;
+                        PalabraUsuario = PalabraUsuario.Remove(j, 1);
+                        PalabraUsuario  = PalabraUsuario.Insert(1, letrapulsada);
+                        exito = true;                       // si es verdadero enhorabuena
                     }
                 }
                 if(exito)
                 {
-                    Console.Write("\nENHORABONA!" + palabra3);
+                    Console.Write("\nENHORABONA!" + PalabraUsuario);
 
                 }
-                else 
+                else  // si no es verdad se incrementa el numero de intentoss
                 {
                     intentos++;
                     Console.Write("\n HAS FALLAT CASURRO! PORTES {0} INTENTOS", intentos);
@@ -150,7 +150,7 @@ namespace ElPenxat8
 
                     
                 }
-                if (intentos == 5)
+                if (intentos == 5)      //si llegas a 5 intentos game over
            {
                Console.WriteLine(" _________");
                Console.WriteLine(" |         |");
@@ -160,9 +160,9 @@ namespace ElPenxat8
                Console.WriteLine(" |");
                Console.WriteLine(" |");
 
-               Console.Write("\n GAAAAAME OVEEEEEEER");
+               Console.Write("\n GAAAAAME OVEEEEEEER!!!!");
            }
-            if (palabra2 == palabra3)
+            if (PalabraSecreta == PalabraUsuario)   //si completas la palabra ganas el juego
             {
                 Console.Write("\n ENHORABOOOONAAAA ERES EL GUANYADOR!!!");
                 break;
