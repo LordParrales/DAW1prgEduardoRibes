@@ -47,7 +47,7 @@ namespace ElPenxat8
 
             Random aleapalabra = new Random();  //crear un metodo random para que escoja una variable al azar
              
-            numpalabra = aleapalabra.Next(1, 8); // escoje una
+            numpalabra = aleapalabra.Next(1, 7); // escoje una
             palabra2 = palabra[numpalabra]; // pasa la palabra
 
             totaletra = palabra2.Length; //separa por caracteres para contar las letras.
@@ -77,83 +77,103 @@ namespace ElPenxat8
             
 
                 
-                for (i=0; i<= totaletra -1;i++)
+                for (j=0; j<= totaletra -1;j++)  //para que analize letra por letra nustra palabra generada
                 {
+                    le = palabra2.Substring(j,1);
+                    if (le.Equals(letrapulsada))
+                    {
+                        palabra3 = palabra3.Remove(j, 1);
+                        palabra3  = palabra3.Insert(1, letrapulsada);
+                        exito = true;
+                    }
+                }
+                if(exito)
+                {
+                    Console.Write("\nENHORABONA!" + palabra3);
 
                 }
+                else 
+                {
+                    intentos++;
+                    Console.Write("\n HAS FALLAT CASURRO! PORTES {0} INTENTOS", intentos);
+                }
+                if (intentos == 0)
+                {
 
-                
-           
-     
-            
+                    Console.WriteLine(" _________");
+                    Console.WriteLine(" |         |");
+                    Console.WriteLine(" |         0");
+                    Console.WriteLine(@" |        /|\");
+                    Console.WriteLine(@" |        / \");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
+                }
+                if (intentos == 1)
+                {
+                    Console.WriteLine(" _________");
+                    Console.WriteLine(" |         |");
+                    Console.WriteLine(" |         0");
+                    Console.WriteLine(@" |        /|\");
+                    Console.WriteLine(@" |        / ");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
+                }
+                if (intentos == 2)
+                {
+                    Console.WriteLine(" _________");
+                    Console.WriteLine(" |         |");
+                    Console.WriteLine(" |         0");
+                    Console.WriteLine(@" |        /|\");
+                    Console.WriteLine(@" |         ");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
+                }
+                if (intentos == 3)
+                {
+                    Console.WriteLine(" _________");
+                    Console.WriteLine(" |         |");
+                    Console.WriteLine(" |         0");
+                    Console.WriteLine(@" |        /|");
+                    Console.WriteLine(@" |         ");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
+                }
+                if (intentos ==4)
+                {
+                    Console.WriteLine(" _________");
+                    Console.WriteLine(" |         |");
+                    Console.WriteLine(" |         0");
+                    Console.WriteLine(@" |         |");
+                    Console.WriteLine(@" |         ");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
 
+                    
+                }
+                if (intentos == 5)
+           {
+               Console.WriteLine(" _________");
+               Console.WriteLine(" |         |");
+               Console.WriteLine(" |         X");
+               Console.WriteLine(@" |         ");
+               Console.WriteLine(@" |         ");
+               Console.WriteLine(" |");
+               Console.WriteLine(" |");
 
-
-          
-
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |        /|\");
-            Console.WriteLine(@" |        / \");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |        /|\");
-            Console.WriteLine(@" |        / ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |        /|\");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |        /|");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |         |");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         0");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
-            Console.WriteLine(" _________");
-            Console.WriteLine(" |         |");
-            Console.WriteLine(" |         X");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(@" |         ");
-            Console.WriteLine(" |");
-            Console.WriteLine(" |");
-
+               Console.Write("\n GAAAAAME OVEEEEEEER");
+           }
+            if (palabra2 == palabra3)
+            {
+                Console.Write("\n ENHORABOOOONAAAA ERES EL GUANYADOR!!!");
+                break;
+            }
+             
+            }while (intentos <=5);
 
             Console.ReadKey();
+    
         }
+
+       
     }
 }
