@@ -53,7 +53,7 @@ namespace ElPenxat8
             totaletra = PalabraSecreta.Length; //separa por caracteres para contar las letras.
             Console.WriteLine("La palabra tiene {0} letras", totaletra);
 
-            for (int i = 0; i <= totaletra; i++)
+            for (int i = 0; i < totaletra; i++)
             {
                 if (PalabraSecreta.Substring(i, 1) != " ")       //para sustraer del numero i un caracter y si no es un espacio  
                     PalabraUsuario = PalabraUsuario + "$";               //cambia las letras por asteriscos
@@ -168,7 +168,7 @@ namespace ElPenxat8
                 break;
             }
              
-            }while (intentos <=5);
+            }while (intentos <5);
 
             Console.ReadKey();
     
