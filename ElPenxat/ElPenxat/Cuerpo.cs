@@ -70,20 +70,23 @@ namespace ElPenxat8
 
             do
             {
-                string letrapulsada= "", letraelegida = "";
+                char letrapulsada, letraelegida; //crear una variable char para las letras de tipo char
                 bool exito = false;
                 Console.Write("Inserte una letra en minuscula: ");
-                letrapulsada = Console.ReadLine();
+                letrapulsada = Console.ReadLine()[0];  // para que coja la primer letra de cada palabra
             
 
                 
                 for (int j=0; j<= totaletra -1;j++)  //para que analize letra por letra nustra palabra generada
                 {
-                    letraelegida = PalabraSecreta.Substring(j,1); //separar las letras para comprobar las letras y luego iguala para saber si la letra pulsada es igual a la letra de la palabra
+                    letraelegida = PalabraSecreta.Substring(j,1)[0]; //separar las letras para comprobar las letras y luego iguala para saber si la letra pulsada es igual a la letra de la palabra
                     if (letraelegida.Equals(letrapulsada))
                     {
-                        PalabraUsuario = PalabraUsuario.Remove(j, 1);
-                        PalabraUsuario  = PalabraUsuario.Insert(1, letrapulsada);
+                        StringBuilder sboculto = new StringBuilder(PalabraUsuario);  //crear un stringbuilder en la palabra ocultada
+                        sboculto[j] = letrapulsada;
+                        PalabraUsuario = sboculto.ToString();
+                        // PalabraUsuario = PalabraUsuario.Remove(j, 1);
+                        //PalabraUsuario  = PalabraUsuario.Insert(1, letrapulsada);
                         exito = true;                       // si es verdadero enhorabuena
                     }
                 }
