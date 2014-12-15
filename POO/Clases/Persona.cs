@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
-    enum EstadoCivil { Soltero, Casado, Divorciado, Viudo }
-    enum Genero { Hombre, Mujer }
+    public enum EstadoCivil { Soltero, Casado, Divorciado, Viudo }
+    public enum Genero { Hombre, Mujer }
 
     public class Persona
     {
+        public static Persona Adan { get; private set; }
+        public static Persona Eva { get; private set; }
+
+        static Persona()
+        {
+            Adan = new Persona(Genero.Hombre, "Adan");
+            Eva = new Persona(Genero.Mujer, "Eva");
+        }
+
         //private static int _Poblacion = 0;
         public static int Poblacion { get; private set; }
 
@@ -18,22 +27,27 @@ namespace Clases
         public readonly DateTime Creacion; // = DateTime.Now;
 
         //Constructores
-        public Persona(Genero genero, string nombre) 
+        private Persona(Genero genero, string nombre)
         {
             Poblacion++;
             this.Creacion = DateTime.Now;
             this.Nombre = nombre;
             this.EstadoCivil = EstadoCivil.Soltero;
             this.Genero = genero;
+            //this.Padre = Adan;
+            //this.Madre = Eva;
         }
 
-        public Persona(Genero genero, string nombre, string apellido)
+        private Persona(Genero genero, string nombre, string apellido)
             : this(genero, nombre)
         {
             this.Apellido = apellido;
         }
 
-
+        public static Persona Create(Genero genero, string nombre, string apellido)
+        {
+            return new Persona(genero, nombre, apellido);
+        }
 
         public static string CapitalizarIniciales(string texto)
         {
@@ -57,46 +71,59 @@ namespace Clases
         public string Nombre
         {
             get { return this.nombre; }
-            set 
-            { 
+            set
+            {
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentException("El nombre no es valido", "Nombre");
-                
-                this.nombre = CapitalizarIniciales(value); 
+
+                this.nombre = CapitalizarIniciales(value);
             }
         }
+
+
+        //public void SetNombre(string queNombre)
+        //{
+        //    this.nombre = queNombre;
+        //}
+
+        //public string GetNombre()
+        //{
+        //    return this.nombre;
+        //}
+
 
         public string Apellido { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
 
-        public int Edad 
-        { 
-            get 
+        public int Edad
+        {
+            get
             {
                 return DateTime.Now.Year - this.FechaNacimiento.Year +
                     DateTime.Now.DayOfYear < this.FechaNacimiento.DayOfYear ? -1 : 0;
-            } 
+            }
         }
 
         public EstadoCivil EstadoCivil { get; private set; }
 
 
         private Persona conyuge;
+
         public Persona Conyuge
         {
             get { return this.conyuge; }
         }
-        
-        public bool Casado { get { return this.conyuge != null; } }
-        
+
+        public bool Casado { get { return this.conyuge != null; } } // o this.EstadoCivil == EstadoCivil.Casado;
+
         public void Casarse(Persona prometido)
         {
             //Comprobar prometido existe
             if (prometido == null)
                 throw new ArgumentNullException("prometido",
                     "No se ha proporcionado una referencia a la persona prometida");
-            
+
             //Comprobar que no se casa consigo mismo
             if (this == prometido)
                 throw new ArgumentException("Una persona no puede casarse consigo misma");
@@ -129,22 +156,6 @@ namespace Clases
         }
 
 
-        //public void SetNombre(string queNombre)
-        //{
-        //    this.nombre = queNombre;
-        //}
-
-        //public string GetNombre()
-        //{
-        //    return this.nombre;
-        //}
-       
-
-        public string Presentarse()
-        {
-            return "Hola, me llamo " + this.NombreCompleto;
-        }
-
         public string NombreCompleto
         {
             get { return this.Nombre + " " + this.Apellido; }
@@ -155,6 +166,12 @@ namespace Clases
         //    return this.Nombre + " " + this.Apellido;
         //}
 
+
+        public string Presentarse()
+        {
+            return "Hola, me llamo " + this.NombreCompleto;
+        }
+
         public string PresentarA(Persona otra)
         {
             if (otra == null)
@@ -162,7 +179,7 @@ namespace Clases
 
             //Si se trata de mi mismo, me presento
             if (otra == this)
-                return this.Presentarse();          
+                return this.Presentarse();
 
             return "Te presento a " + otra.NombreCompleto;
         }
@@ -176,8 +193,96 @@ namespace Clases
 
         public static bool SonHermanos(Persona p1, Persona p2)
         {
-           
+            if (p1 == null || p2 == null) return false;
+
+            if (p1.Padre == p2.Padre) return true;
+            if (p2.Madre == p2.Madre) return true;
+            return false;
         }
+
+        public bool EsHermano(Persona otra)
+        {
+            return SonHermanos(this, otra);
+        }
+
+
+        public bool Huerfano
+        {
+            get { }
+        }
+
+        public static bool SonPrimos(Persona p1, Persona p2)
+        {
+
+        }
+
+        public bool EsPrimo(Persona otra)
+        {
+
+        }
+
+        public static bool SonCuñados(Persona p1, Persona p2)
+        {
+
+        }
+
+        public bool EsTio(Persona sobrino)
+        {
+
+        }
+
+        public bool EsSobrino(Persona tio)
+        {
+
+        }
+
+
+        public Persona AbueloPaterno
+        {
+            get
+            {
+
+            }
+        }
+
+        public Persona AbuelaPaterna
+        {
+            get
+            {
+
+            }
+        }
+
+        public Persona AbueloMaterno
+        {
+            get
+            {
+
+            }
+        }
+
+        public Persona AbuelaMaterna
+        {
+            get
+            {
+
+            }
+        }
+
+
+        public override string ToString()
+        {
+            return this.NombreCompleto + " (" + this.Genero + ")";
+        }
+
+
+        //Propiedad indice
+        public string this[int parte]
+        {
+            get { return this.NombreCompleto.Split()[parte]; }
+            //set { this.Hijos[orden] = value; } //no aplicable en este ejemplo
+        }
+
 
     }
 }
